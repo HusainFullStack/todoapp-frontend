@@ -107,13 +107,13 @@ export default function ViewTodoPage() {
           <div className="flex gap-2">
             <button
               onClick={() => router.push(`/dashboard/edit/${todo.id}`)}
-              className="bg-green-600 cursor-pointer hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1">
+              className="bg-green-600 font-bold cursor-pointer hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1">
               <Edit className="w-4 h-4" />
               Edit
             </button>
             <button
               onClick={() => setDeleteId(todo.id)}
-              className="bg-red-600 cursor-pointer hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1"
+              className="bg-red-600 cursor-pointer font-bold hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1"
             >
               <Trash2 className="w-4 h-4" />
               Delete

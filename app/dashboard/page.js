@@ -34,16 +34,9 @@ export const getPriorityStyle = (priority) => {
 export default function DashboardPage() {
   const router = useRouter();
   const { todos, deleteTodo, loading } = useTodos();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
-
-  const handleAddUser = (user) => {
-    setUsers((prev) => [...prev, user]);
-  };
-
   const confirmDelete = (id) => setDeleteId(id);
-
   const handleConfirmDelete = () => {
     deleteTodo(deleteId);
     setDeleteId(null);
@@ -162,7 +155,6 @@ export default function DashboardPage() {
       <AddUserModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onAddUser={handleAddUser}
       />
 
       <ConfirmDeleteModal

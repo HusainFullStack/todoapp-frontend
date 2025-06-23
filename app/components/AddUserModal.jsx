@@ -5,7 +5,7 @@ import Button from "./Button";
 import { Axios } from "@/app/lib/Axios";
 import { toast } from "sonner";
 
-export default function AddUserModal({ isOpen, onClose, onAddUser }) {
+export default function AddUserModal({ isOpen, onClose }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +26,6 @@ export default function AddUserModal({ isOpen, onClose, onAddUser }) {
         password,
       });
 
-      onAddUser({ name, email });
       toast.success("User registered successfully!");
       setName("");
       setEmail("");
