@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { UserProvider } from "../context/UserContext";
+import { TodoProvider } from "../context/TodoContext";
 
 export default function DashboardLayout({ children }) {
   const router = useRouter();
@@ -27,5 +27,5 @@ if (loading) {
 }
 
 
-  return <UserProvider>{children}</UserProvider>;
+  return <TodoProvider>{children}</TodoProvider>;
 }

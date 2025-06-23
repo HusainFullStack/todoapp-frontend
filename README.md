@@ -51,10 +51,11 @@ A fullstack **Todo Management Application** built with:
    ```
 
 3. **Environment setup**
-   Create `.env.local` file:
+   Create `.env` file:
 
    ```env
    NEXT_PUBLIC_API_URI=http://localhost:8000/api
+   NEXT_PUBLIC_FILES_URI=http://localhost:8000/files
    ```
 
 4. **Run development server**
@@ -95,14 +96,6 @@ app/
 ├── layout.js           # Root layout
 ├── globals.css         # Tailwind + custom styles
 ```
-
-## 📄 Example .env.local
-
-```
-NEXT_PUBLIC_API_URI=http://localhost:8000/api
-```
-
-> 🔐 Ensure CORS is enabled in your Laravel backend for this domain.
 
 ## 📦 Packages Used
 

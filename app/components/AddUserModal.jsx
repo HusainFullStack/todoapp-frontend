@@ -2,20 +2,45 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import Button from "./Button";
+import { Axios } from "@/app/lib/Axios";
+import { toast } from "sonner";
 
 export default function AddUserModal({ isOpen, onClose, onAddUser }) {
   const [name, setName] = useState("");
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleAddUser = (e) => {
+  const handleAddUser = async (e) => {
     e.preventDefault();
-    if (!name || !email) return;
+    if (!name || !email || !password) {
+      toast.error("Please fill all fields.");
+      return;
+    }
 
-    onAddUser({ name, email });
-    onClose();
-    setName("");
-    setEmail("");
+    setLoading(true);
+    try {
+      const response = await Axios.post("/register", {
+        name,
+        email,
+        password,
+      });
+
+      onAddUser({ name, email });
+      toast.success("User registered successfully!");
+      setName("");
+      setEmail("");
+      setPassword("");
+      onClose();
+    } catch (error) {
+      if (error.response?.data?.message) {
+        toast.error(error.response.data.error || error.response.data.message);
+      } else {
+        toast.error("Failed to register user.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -25,7 +50,7 @@ export default function AddUserModal({ isOpen, onClose, onAddUser }) {
       <div className="bg-white w-full max-w-md p-6 rounded-xl shadow-lg relative">
         <button
           onClick={onClose}
-          className="absolute cursor-pointer top-3 right-3 text-gray-400 hover:text-black"
+          className="absolute top-3 cursor-pointer right-3 text-gray-400 hover:text-black"
         >
           <X className="w-5 h-5" />
         </button>
@@ -53,8 +78,19 @@ export default function AddUserModal({ isOpen, onClose, onAddUser }) {
               required
             />
           </div>
+          <div>
+            <label className="text-sm text-gray-700 block mb-1">Password</label>
+            <input
+              type="password"
+              className="w-full border border-zinc-300 px-4 py-2 rounded-lg"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter password"
+              required
+            />
+          </div>
           <Button
-            loading={false}
+            loading={loading}
             style={`${
               loading
                 ? "bg-green-400 cursor-not-allowed"
